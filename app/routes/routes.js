@@ -1,16 +1,35 @@
 // load up the machine route
-const userRoutes = require('./database');
+const express = require('express');
+const fs = require('fs');
 
-const appRouter = (app, fs) => {
-  // we've added in a default route here that handles empty routes
-  // at the base API url
-  app.get('/', (req, res) => {
-    res.send('welcome to the development api-server');
+
+function errorHandler(res) {
+  err => res.status(500).send(err);
+}
+
+// Router
+const router = express.Router();
+
+// Database
+const dbPath = './../JSON/database.json';
+
+// Define routes
+router.get('/', (req, res) => {
+  res.render('index');
+})
+.get('/database', (req, res) => {
+  fs.readFile(dbPath, 'utf8', (err, data) => {
+    if (err) {
+      throw err;
+    }
+    var machines = JSON.parse(data);
+    
+    res.render('machinesAllMachines', {machines: machines});
   });
-
-  // run our user route module here to complete the wire up
-  userRoutes(app, fs);
-};
+})
+.use((req, res) => {
+  res.redirect('/');
+});
 
 // this line is unchanged
-module.exports = appRouter;
+module.exports = router;
