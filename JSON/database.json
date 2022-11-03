@@ -1,0 +1,17 @@
+{
+    "machine1": {
+        "id": "1",
+        "name": "luks",
+        "type": "laptop"
+    },
+    "machine2": {
+        "id": "2",
+        "name": "luks-server",
+        "type": "server"
+    },
+    "machine3": {
+        "id": "3",
+        "name": "luks-desktop",
+        "type": "desktop"
+    }
+}

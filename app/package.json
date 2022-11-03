@@ -1,0 +1,32 @@
+{
+  "name": "network-probe",
+  "version": "1.0.0",
+  "description": "A Nodejs web app to show network informations",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luks/network-probe.git"
+  },
+  "keywords": [
+    "network",
+    "probe",
+    "nodejs"
+  ],
+  "author": "luks-m",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luks/network-probe/issues"
+  },
+  "homepage": "https://github.com/luks/network-probe#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
