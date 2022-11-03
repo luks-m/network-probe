@@ -12,6 +12,6 @@ def xml2json(xml):
     with open("sample.json", "w") as outfile:
         outfile.write(xmljson)
 
-xml2json('./training.xml')
+xml2json('./result.xml')
 
 
