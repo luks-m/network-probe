@@ -23,8 +23,7 @@ router.get('/', (req, res) => {
       throw err;
     }
     var machines = JSON.parse(data);
-    
-    res.render('machinesAllMachines', {machines: machines});
+    res.render('machinesAllMachines', {extracted_data: machines});
   });
 })
 .use((req, res) => {

@@ -7,28 +7,21 @@ h2 {
     font-size: 100%;
 }
 
-/* Leaflet Map */
-#map {
-    width: 80vw;
-    min-height: 60vh;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 /* Banner */
 #banner img {
-	max-width: 30vw;
+	max-width: 200vw;
 }
 
 /* Footer */
 footer {
-    margin-top: 5vh;
+    text-align: center;
     bottom: 0;
 }
 
-
 /* Sticky footer */
 body {
+    background-color: #444444;
+    color: #f5f5f5;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
