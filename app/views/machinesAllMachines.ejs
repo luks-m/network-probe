@@ -5,21 +5,24 @@
 </div>
 <div class="row">
     <h2>
-        Scan oppéré le <%= extracted_data["nmaprun"]["@startstr"] %>
+        Scan oppéré le <%= data["nmaprun"]["@startstr"] %>
     </h2>
 </div>
 <div class="row">
     <table class="centered highlight responsive-table">
-        <thead class="red accent-1">
+        <thead class="indigo darken-3">
             <tr>
                 <th colspan="1">Hostname</th>
                 <th colspan="1">IP</th>
             </tr>
         </thead>
         <tbody>
+            <% hosts.forEach(host => { %>
             <tr>
-
+                <td><%= host.name %></td>
+                <td><%= host.address %></td>
             </tr>
+            <% }); %>
         </tbody>
     </table>
 </div>
