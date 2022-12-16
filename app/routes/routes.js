@@ -1,6 +1,7 @@
 // load up the machine route
 const express = require('express');
 const fs = require('fs');
+const helper = require('./helper.js');
 
 
 function errorHandler(res) {
@@ -10,12 +11,13 @@ function errorHandler(res) {
 // Router
 const router = express.Router();
 
+
 // Database
 const dbPath = './../JSON/database.json';
 
 // Define routes
 router.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', {functions : helper.testOnClickButton});
 })
 .get('/database', (req, res) => {
   fs.readFile(dbPath, 'utf8', (err, data) => {
@@ -26,19 +28,11 @@ router.get('/', (req, res) => {
     var hosts = [];
     for (var i = 0; i < machines["nmaprun"]["host"].length; i++) {
       var infos = {};
+
       const machine = machines["nmaprun"]["host"][i];
-      if (machine["address"] != undefined && machine["address"][0] != undefined && machine["address"][0]["@addrtype"] == "ipv4") {
-        infos["address"] = machine["address"][0]["@addr"];
-      }
-      else {
-        infos["address"] = "No IP found";
-      }
-      if (machine["hostnames"] != undefined && machine["hostnames"]["hostname"] != undefined) {
-        infos["name"] = machine["hostnames"]["hostname"]["@name"];
-      }
-      else {
-        infos["name"] = "No name found";
-      }
+      infos["address"] = helper.get_ip(machine);
+      infos["name"] = helper.get_name(machine);
+
       hosts.push(infos);
     }
     res.render('machinesAllMachines', {data: machines, hosts: hosts});
