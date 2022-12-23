@@ -1,16 +1,46 @@
 // load up the machine route
-const userRoutes = require('./database');
+const express = require('express');
+const fs = require('fs');
+const helper = require('./helper.js');
 
-const appRouter = (app, fs) => {
-  // we've added in a default route here that handles empty routes
-  // at the base API url
-  app.get('/', (req, res) => {
-    res.send('welcome to the development api-server');
+
+function errorHandler(res) {
+  err => res.status(500).send(err);
+}
+
+// Router
+const router = express.Router();
+
+
+// Database
+const dbPath = './../JSON/database.json';
+
+// Define routes
+router.get('/', (req, res) => {
+  res.render('index', {functions : helper.testOnClickButton});
+})
+.get('/database', (req, res) => {
+  fs.readFile(dbPath, 'utf8', (err, data) => {
+    if (err) {
+      throw err;
+    }
+    var machines = JSON.parse(data);
+    var hosts = [];
+    for (var i = 0; i < machines["nmaprun"]["host"].length; i++) {
+      var infos = {};
+
+      const machine = machines["nmaprun"]["host"][i];
+      infos["address"] = helper.get_ip(machine);
+      infos["name"] = helper.get_name(machine);
+
+      hosts.push(infos);
+    }
+    res.render('machinesAllMachines', {data: machines, hosts: hosts});
   });
-
-  // run our user route module here to complete the wire up
-  userRoutes(app, fs);
-};
+})
+.use((req, res) => {
+  res.redirect('/');
+});
 
 // this line is unchanged
-module.exports = appRouter;
+module.exports = router;
