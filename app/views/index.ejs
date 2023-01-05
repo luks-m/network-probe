@@ -1,11 +1,25 @@
 <%- include('header', {title: 'Machines', leaflet: true, css: [], js: [], banner: true}); -%>
 <head>
     <link rel="stylesheet" href="./../public/css/app.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <h1>Bienvenue sur la plateforme de scan de votre réseau</h1>
 
 <div class="row center-align">
-    <a class="waves-effect waves-light btn-large indigo darken-3 white-text" onclick="functions.testOnClickButton();"> SCAN<i class="material-icons right">network_wifi</i></a>
+    <button class="waves-effect waves-light btn-large indigo darken-3 white-text" id="scan_btn"> SCAN<i class="material-icons right">network_wifi</i></button>
+    <script>
+        $(document).ready(function() {
+            $('#scan_btn').click(function() {
+                $.ajax({
+                    url: '/scan',
+                    type: 'GET',
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+        })
+    </script>
 </div>
 
 <%- include('footer'); -%>

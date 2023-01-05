@@ -2,6 +2,7 @@
 const express = require('express');
 const fs = require('fs');
 const helper = require('./helper.js');
+const { spawn } = require('child_process');
 
 
 function errorHandler(res) {
@@ -17,7 +18,27 @@ const dbPath = './../JSON/database.json';
 
 // Define routes
 router.get('/', (req, res) => {
-  res.render('index', {functions : helper.testOnClickButton});
+  res.render('index');
+})
+.get('/scan', async (req, res) => {
+  console.log("Scan");
+  
+  const python_path = './../../Data/scan.py';
+  const python = spawn('python3.10', [python_path]);
+
+  python.on('error', (err) => {
+    console.log(err);
+  });
+
+  python.stdout.on('data', function (data) {
+    console.log('Pipe data from python script ...');
+  });
+
+  python.on('close', (code) => {
+    console.log('child process close');
+    console.log("Scan done");
+    res.redirect('/');
+  });
 })
 .get('/database', (req, res) => {
   fs.readFile(dbPath, 'utf8', (err, data) => {
