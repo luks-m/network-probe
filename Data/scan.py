@@ -1,5 +1,7 @@
 import time
+import os
 
 print("Begin of script")
-time.sleep(3)
+bashCommand = "mv ./../database.json ./../JSON/database.json"
+os.system(bashCommand)
 print("End of script")

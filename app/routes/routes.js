@@ -5,10 +5,6 @@ const helper = require('./helper.js');
 const { spawn } = require('child_process');
 
 
-function errorHandler(res) {
-  err => res.status(500).send(err);
-}
-
 // Router
 const router = express.Router();
 
@@ -31,13 +27,14 @@ router.get('/', (req, res) => {
   });
 
   python.stdout.on('data', function (data) {
-    console.log('Pipe data from python script ...');
+    console.log('Pipe data from python script ... data: ' + data);
   });
 
   python.on('close', (code) => {
+    console.log(`child process close all stdio with code ${code}`)
     console.log('child process close');
     console.log("Scan done");
-    res.redirect('/');
+    res.send('scan done');
   });
 })
 .get('/database', (req, res) => {
