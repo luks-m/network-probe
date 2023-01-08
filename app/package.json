@@ -1,6 +1,6 @@
 {
   "name": "network-probe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Nodejs web app to show network informations",
   "main": "server.js",
   "scripts": {
@@ -24,8 +24,10 @@
   "homepage": "https://github.com/luks/network-probe#readme",
   "dependencies": {
     "body-parser": "^1.20.1",
+    "child_process": "^1.0.2",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "expresss": "^0.0.0",
     "jquery": "^3.6.3",
     "pug": "^3.0.2"
   },
