@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
 .get('/scan', async (req, res) => {
   console.log("Scan");
   
-  const python_path = './../../Data/scan.py';
-  const python = spawn('python3.10', [python_path]);
+  const python_path = './../Data/scan.py';
+  const python = spawn('python3', [python_path]);
 
   python.on('error', (err) => {
     console.log(err);
@@ -32,9 +32,8 @@ router.get('/', (req, res) => {
 
   python.on('close', (code) => {
     console.log(`child process close all stdio with code ${code}`)
-    console.log('child process close');
     console.log("Scan done");
-    res.send('scan done');
+    res.redirect('/database');
   });
 })
 .get('/database', (req, res) => {

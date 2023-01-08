@@ -2,6 +2,7 @@ import time
 import os
 
 print("Begin of script")
-bashCommand = "mv ./../database.json ./../JSON/database.json"
+bashCommand = "echo 'Hello World'"
+time.sleep(2)
 os.system(bashCommand)
 print("End of script")
