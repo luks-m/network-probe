@@ -30,3 +30,28 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+.arrow {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+  
+.arrow::before {
+    content: '';
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid black;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+td .dropdown-content {
+    display: none;
+}
+  
+td:hover .dropdown-content {
+    display: block;
+}

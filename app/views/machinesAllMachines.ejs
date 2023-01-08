@@ -14,17 +14,52 @@
             <tr>
                 <th colspan="1">Hostname</th>
                 <th colspan="1">IP</th>
+                <th colspan="1">Plus d'informations</th>
             </tr>
         </thead>
         <tbody>
-            <% hosts.forEach(host => { %>
+            <% hosts.forEach((host,index) => { %>
             <tr>
                 <td><%= host.name %></td>
                 <td><%= host.address %></td>
+                <td>
+                    <button class="btn arrow" id="btn<%= index %>">Infos</button>
+                </td>
             </tr>
+            <%# ports.forEach((ports,index) => { %>
+                <tr id="dropdown<%= index %>" style="display:none; background-color: #737373; text-align: center;">
+                    <td colspan="3">
+                        <table>
+                            <%# <tr>
+                                <td colspan="3">Informations</td>
+                            </tr> #%>
+                            <tr>
+                                <td colspan="3">Contenu de la première ligne de la liste déroulante</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
             <% }); %>
+            <%# }); %> 
         </tbody>
     </table>
 </div>
+
+<script>
+    const btns = document.querySelectorAll('.arrow');
+    btns.forEach((btn, index) => {
+        btn.addEventListener('click', function() {
+            // récupère le contenu à afficher ou masquer
+            const dropdown = document.querySelector(`#dropdown${index}`);
+
+            // affiche ou cache le contenu en fonction de son état actuel
+            if (dropdown.style.display === 'none') {
+                dropdown.style.display = 'table-row';
+            } else {
+                dropdown.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 <%- include('footer'); -%>
