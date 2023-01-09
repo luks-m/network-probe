@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 })
 .get('/scan', async (req, res) => {
   console.log("Scan");
-  
+
   const python_path = './../Data/scan.py';
   const python = spawn('python3', [python_path]);
 
@@ -53,7 +53,7 @@ router.get('/', (req, res) => {
 
       hosts.push(infosMachine);
     }
-    res.render('machinesAllMachines', {data: machines, hosts: hosts}); // ports: ports});
+    res.render('machinesAllMachines', { data: machines, hosts: hosts }); // ports: ports});
     // fs.readFile(testPath, 'utf8', (err, data) => {
     //   if (err) {
     //     throw err;
