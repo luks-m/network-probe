@@ -11,7 +11,7 @@ const router = express.Router();
 
 // Database
 const dbPath = './../JSON/database.json';
-const testPath = './../JSON/test.json';
+const testPath = './../JSON/testPort.json';
 
 // Define routes
 router.get('/', (req, res) => {
