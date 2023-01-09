@@ -15,7 +15,6 @@ h2 {
 /* Footer */
 footer {
     text-align: center;
-    bottom: 0;
 }
 
 /* Sticky footer */
@@ -31,7 +30,7 @@ main {
     flex: 1 0 auto;
 }
 
-.arrow {
+/* .arrow {
     background: transparent;
     border: none;
     outline: none;
@@ -54,4 +53,4 @@ td .dropdown-content {
   
 td:hover .dropdown-content {
     display: block;
-}
+} */

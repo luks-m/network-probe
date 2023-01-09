@@ -1,5 +1,7 @@
 <%- include('header', {title: 'Machines', leaflet: true, css: [], js: [], banner: true}); -%>
 <h1>Bienvenue sur la plateforme de scan de votre réseau</h1>
+<h2>Cet outil vous permettra de scanner votre réseau pour en découvrir les potentielles vulnérabilités.</h2>
+<h2>Vous pouvez lancer un scan en cliquant ci-dessous, ou bien consulter un scan déjà effectué en consultant une sauvegarde.</h2>
 
 
 <div class="row" id="row-id">
@@ -24,6 +26,15 @@
             });
         })
     </script>
+</div>
+<div>
+    <a class="dropdown-trigger waves-effect waves-light btn-large indigo darken-1" href="#" data-target="files">Sauvegardes<i class="material-icons right">sd_storage</i></a>
+            <ul id="files" class="dropdown-content grey lighten-2">
+                <% files.forEach((file) => { %>
+                    <% database_name = "/database/"+file ;%>
+                    <li><a href="<%= database_name %>"><%= file %></a></li>
+                <% }); %>
+            </ul>
 </div>
 
 <%- include('footer'); -%>

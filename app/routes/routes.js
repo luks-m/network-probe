@@ -10,7 +10,9 @@ const router = express.Router();
 
 // Define routes
 router.get('/', (req, res) => {
-  res.render('index');
+  const files = fs.readdirSync('./../JSON/');
+
+  res.render('index', { files: files });
 })
 .get('/scan', async (req, res) => {
   console.log("Scan");
@@ -47,11 +49,13 @@ router.get('/', (req, res) => {
   });
 })
 .get('/database/:name?', (req, res) => {
-  const data_name = req.params.name || 'current_database';
+  const data_name = req.params.name || 'current_database.json';
   
   // Database
-  const dbPath = './../JSON/'+data_name+'.json';
+  const dbPath = './../JSON/'+data_name;
   const testPath = './../JSON/test.json';
+
+  const files = fs.readdirSync('./../JSON/');
 
   fs.readFile(dbPath, 'utf8', (err, data) => {
     if (err) {
@@ -68,7 +72,7 @@ router.get('/', (req, res) => {
 
       hosts.push(infosMachine);
     }
-    res.render('machinesAllMachines', { data: machines, hosts: hosts }); // ports: ports});
+    res.render('machinesAllMachines', { data: machines, hosts: hosts, files: files}); // ports: ports});
     // fs.readFile(testPath, 'utf8', (err, data) => {
     //   if (err) {
     //     throw err;
