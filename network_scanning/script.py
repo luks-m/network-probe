@@ -31,7 +31,7 @@ def general_scan():
     #ip_addr = '172.21.202.125'
     scanner.scan(hosts='172.21.202.0/24')
     scanner.command_line()
-    ' nmap -sV -Pn --script vulners --script-args mincvss=5.0 172.21.202.0/24'
+    ' nmap -sV -Pn 172.21.202.0/24'
    # hosts_list = [(x, scanner[x]) for x in scanner.all_hosts()]
     fileXML = open(path_xml, "wb")
 	#Create XML nmap report
@@ -51,7 +51,7 @@ def agressif_scan():
             print(host.address[0]["addr"])
             scanner.scan(hosts=host.address[0]["addr"])
             scanner.command_line()
-            'nmap -A -p 22-443'+host.address[0]["addr"]
+            'nmap -A -p 22-443 --script vulners --script-args mincvss=5.0'+host.address[0]["addr"]
             fileXML.write(scanner.get_nmap_last_output())
         else :
             print("FIN")
