@@ -73,20 +73,22 @@
                     <button class="btn indigo darken-1" id="btn<%= index %>">Infos<i class="material-icons left">arrow_drop_down</i></button>
                 </td>
             </tr>
-            <%# ports.forEach((ports,index) => { %>
-
-                <tr id="dropdown<%= index %>" class="indigo lighten-2 center-align" style="display: none;">
-                    <td colspan="3">
-                        <table>
-                            <%# <tr>
-                                <td colspan="3">Informations</td>
-                            </tr> #%>
-                            <tr>
-                                <td colspan="3">Contenu de la première ligne de la liste déroulante</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+            <tr id="dropdown<%= index %>" class="indigo lighten-2 center-align" style="display: none;">
+                <td colspan="3">
+                    <table>
+                        <%# ports.forEach((ports,index) => { %>
+                        <%# <tr>
+                            <td colspan="3">Informations</td>
+                        </tr> #%>
+                        <tr>
+                            <td colspan="3">Contenu de la première ligne de la liste déroulante</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Contenu de la première ligne de la liste déroulante</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
             <% }); %>
             <%# }); %> 
         </tbody>
