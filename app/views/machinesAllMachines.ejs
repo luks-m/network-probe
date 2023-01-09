@@ -3,19 +3,60 @@
 <div class="row">
     <h1>L'ensemble des machines</h1>
 </div>
-<div class="row">
-    <div class="col s6">
-        <h2>Scan oppéré le <%= data["nmaprun"]["@startstr"] %></h2>
-    </div>
-    <div class="col s3">
-        <a class="waves-effect waves-light btn indigo darken-1 centered" href="/index">Nouveau Scan<i class="material-icons right">replay</i></a>
-    </div>
-    <div class="col s3">
-        <button class="waves-effect waves-light btn indigo darken-1">Enregistrer<i class="material-icons right">save</i></button>
+<div class="col s5">
+    <h2>Scan oppéré le <%= data["nmaprun"]["@startstr"] %></h2>
+</div>
+
+<div id="table_id">
+    <div class="row">
+            <div class="col s5"></div>
+            <button class="waves-effect waves-light btn col s2 indigo darken-1" id="new_scan">Nouveau Scan<i class="material-icons right">replay</i></button>
+            <button class="waves-effect waves-light btn col s2 indigo darken-1" id="save">Enregistrer<i class="material-icons right">save</i></button>
+            <button class="waves-effect waves-light btn col s2 indigo darken-1">Charger<i class="material-icons right">import_export</i></button>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#new_scan').click(function() {
+            container = document.getElementById('table_id');
+            newElement = $(document.createElement('pre'));
+            newElement.append(`<p>Scan en cours...</p>`);
+            newElement.append(`<div class="progress indigo lighten-4"><div class="indeterminate indigo darken-1"></div></div>`);
+            container.appendChild(newElement[0]);
+            $.ajax({
+                url: '/scan',
+                type: 'GET',
+                success: function (data) {
+                    console.log(data);
+                    container.removeChild(newElement[0]);
+                    window.location.replace('/database');
+                }
+            });
+        });
+        $('#save').click(function() {
+            var value = prompt("Saisissez le nom du fichier à enregistrer :");
+            if (value) {
+                container = document.getElementById('table_id');
+                newElement = $(document.createElement('pre'));
+                newElement.append(`<p>Enregistrement en cours...</p>`);
+                newElement.append(`<div class="progress indigo lighten-4"><div class="indeterminate indigo darken-1"></div></div>`);
+                container.appendChild(newElement[0]);
+                $.ajax({
+                    url: '/save',
+                    type: 'GET',
+                    data: {name: value},
+                    success: function (data) {
+                        console.log(data);
+                        container.removeChild(newElement[0]);
+                        window.location.replace('/database');
+                    }
+                });
+            }
+        });
+    })
+</script>
 <div class="row">
-    <table class="rounded-edge centered highlight responsive-table">
+    <table class="centered highlight responsive-table">
         <thead class="indigo darken-1 white-text">
             <tr>
                 <th colspan="1">Hostname</th>
