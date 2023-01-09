@@ -7,6 +7,7 @@ h2 {
     font-size: 100%;
 }
 
+
 /* Banner */
 #banner img {
 	max-width: 200vw;
@@ -29,6 +30,8 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+.material-icons.md-48 { font-size: 48px; }
 
 /* .arrow {
     background: transparent;
