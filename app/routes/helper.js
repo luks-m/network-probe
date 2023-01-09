@@ -48,11 +48,6 @@ function get_port(host) {
     }
 }
 
-function testOnClickButton() {
-    console.log("test");
-}
-
 exports.get_ip = get_ip;
 exports.get_name = get_name;
 exports.get_port = get_port;
-exports.testOnClickButton = testOnClickButton;

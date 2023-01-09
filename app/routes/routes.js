@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
     console.log('Pipe data from python script ... data: ' + data);
   });
 
-  python.on('close', (code) => {
+  python.on('exit', (code) => {
     console.log(`child process close all stdio with code ${code}`)
     console.log("Scan done");
     res.redirect('/database');

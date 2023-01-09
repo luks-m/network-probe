@@ -15,8 +15,8 @@
     </div>
 </div>
 <div class="row">
-    <table class="centered highlight responsive-table white-text">
-        <thead class="indigo darken-1">
+    <table class="rounded-edge centered highlight responsive-table">
+        <thead class="indigo darken-1 white-text">
             <tr>
                 <th colspan="1">Hostname</th>
                 <th colspan="1">IP</th>
@@ -29,11 +29,12 @@
                 <td><%= host.name %></td>
                 <td><%= host.address %></td>
                 <td>
-                    <button class="btn arrow indigo darken-1" id="btn<%= index %>">Infos</button>
+                    <button class="btn indigo darken-1" id="btn<%= index %>">Infos<i class="material-icons left">arrow_drop_down</i></button>
                 </td>
             </tr>
             <%# ports.forEach((ports,index) => { %>
-                <tr id="dropdown<%= index %>" style="display:none; background-color: #8b9dee; text-align: center;">
+
+                <tr id="dropdown<%= index %>" class="indigo lighten-2 center-align" style="display: none;">
                     <td colspan="3">
                         <table>
                             <%# <tr>

@@ -10,7 +10,7 @@
                 container = document.getElementById('row-id');
                 newElement = $(document.createElement('pre'));
                 newElement.append(`<p>Scan en cours...</p>`);
-                newElement.append(`<div class="progress"><div class="indeterminate"></div></div>`);
+                newElement.append(`<div class="progress indigo lighten-4"><div class="indeterminate indigo darken-1"></div></div>`);
                 container.appendChild(newElement[0]);
                 $.ajax({
                     url: '/scan',
@@ -18,6 +18,7 @@
                     success: function (data) {
                         console.log(data);
                         container.removeChild(newElement[0]);
+                        window.location.replace('/database');
                     }
                 });
             });
