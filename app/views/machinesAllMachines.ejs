@@ -70,18 +70,18 @@
             </tr>
         </thead>
         <tbody>
-            <% hosts.forEach((host,index) => { %>
+        <% hosts.forEach((host,hostIndex) => { %>
             <tr>
                 <td><%= host.name %></td>
                 <td><%= host.address %></td>
                 <td>
-                    <button class="btn indigo darken-1" id="btn<%= index %>">Infos<i class="material-icons left">arrow_drop_down</i></button>
+                    <button class="btn indigo darken-1 row-btn" id="btn<%= hostIndex %>">Infos<i class="material-icons left">arrow_drop_down</i></button>
                 </td>
             </tr>
-            <tr id="dropdown<%= index %>" class="indigo lighten-2 center-align" style="display: none;">
+            <tr id="dropdown<%= hostIndex %>" class="indigo lighten-2 center-align" style="display: none;">
                 <td colspan="3">
                     <table>
-                        <%# ports.forEach((ports,index) => { %>
+                        <%# ports.forEach((port,portsIndex) => { %>
                         <%# <tr>
                             <td colspan="3">Informations</td>
                         </tr> #%>
@@ -94,24 +94,23 @@
                     </table>
                 </td>
             </tr>
-            <% }); %>
-            <%# }); %> 
+        <% }); %>
         </tbody>
     </table>
 </div>
 
 <script>
-    const btns = document.querySelectorAll('.arrow');
-    btns.forEach((btn, index) => {
+    const btns = document.querySelectorAll('.row-btn');
+    btns.forEach((btn, btnIndex) => {
         btn.addEventListener('click', function() {
             // récupère le contenu à afficher ou masquer
-            const dropdown = document.querySelector(`#dropdown${index}`);
+            const dropdownElement = document.querySelector(`#dropdown${btnIndex}`);
 
             // affiche ou cache le contenu en fonction de son état actuel
-            if (dropdown.style.display === 'none') {
-                dropdown.style.display = 'table-row';
+            if (dropdownElement.style.display === 'none') {
+                dropdownElement.style.display = 'table-row';
             } else {
-                dropdown.style.display = 'none';
+                dropdownElement.style.display = 'none';
             }
         });
     });
