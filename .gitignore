@@ -1,5 +1,3 @@
 app/node_modules/*
-package.json
-package-lock.json
 app/routes/routes copy.js
 test.js
