@@ -20,7 +20,7 @@ footer {
 
 /* Sticky footer */
 body {
-    background-color: #d3d3d3;
+    background-color: #e6e6e6;
     color: #414141;
     display: flex;
     min-height: 100vh;
@@ -32,28 +32,3 @@ main {
 }
 
 .material-icons.md-48 { font-size: 48px; }
-
-/* .arrow {
-    background: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-}
-  
-.arrow::before {
-    content: '';
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 8px solid black;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-td .dropdown-content {
-    display: none;
-}
-  
-td:hover .dropdown-content {
-    display: block;
-} */
