@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 app/node*
 package.json
 package-lock.json
-=======
 app/routes/routes copy.js
 test.js
->>>>>>> 12afdcd (Moduifcation over the code of the infos displayed for each device)
