@@ -32,6 +32,7 @@ def agressif_scan(path_xml2):
             fileXML2.write(scanner.get_nmap_last_output())
             fileXML2.close()
             path_xml3.append(path_xml2)
+            print(path_xml3)
             path_xml2 = "../Data/results_p"
             i+=1
         else :
@@ -40,23 +41,23 @@ def agressif_scan(path_xml2):
     
 
 def xmltojson(path_xml3):
-    i = 0
+    print(path_xml3)
     for path in path_xml3:
-        while path_xml3[i] is not None :
+            print (path)
             with open(path) as f:
                 data_dict = xmltodict.parse(f.read())
             
             f.close()
             json_data = json.dumps(data_dict, indent=4, sort_keys=True)
 
-            with open(path_json, "w") as j:
+            with open(path_json, "a") as j:
                 j.write(json_data)
 
             j.close()
 
-general_scan()
+#general_scan()
 agressif_scan(path_xml2)
-xmltojson(path_xml)
+xmltojson(path_xml3)
 
 
 
