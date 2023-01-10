@@ -1,22 +1,70 @@
 <%- include('header', {title: 'Machines', leaflet: false, css: [], js: [], banner: false}); -%>
-<link rel="stylesheet" href="app.css">
 <div class="row">
-    <h1>L'ensemble des machines</h1>
+    <h1>Résultat du scan</h1>
 </div>
-<div class="row">
-    <div class="col s6">
-        <h2>Scan oppéré le <%= data["nmaprun"]["@startstr"] %></h2>
-    </div>
-    <div class="col s3">
-        <a class="waves-effect waves-light btn indigo darken-1 centered" href="/index">Nouveau Scan<i class="material-icons right">replay</i></a>
-    </div>
-    <div class="col s3">
-        <button class="waves-effect waves-light btn indigo darken-1">Enregistrer<i class="material-icons right">save</i></button>
+<div class="col s5">
+    <h2>Scan oppéré le <%= data["nmaprun"]["@startstr"] %></h2>
+</div>
+
+<div id="table_id">
+    <div class="row">
+            <div class="col s4"></div>
+            <button class="waves-effect waves-light btn col s2 indigo darken-1" id="new_scan">Nouveau Scan<i class="material-icons right">replay</i></button>
+            <div class="col s1"></div>
+            <a class="dropdown-trigger waves-effect waves-light btn col s2 indigo darken-1" href="#" data-target="files">Charger<i class="material-icons right">import_export</i></a>
+            <div class="col s1"></div>
+            <button class="waves-effect waves-light btn col s2 indigo darken-1" id="save">Enregistrer<i class="material-icons right">save</i></button>
+            <ul id="files" class="dropdown-content grey lighten-2">
+                <% files.forEach((file) => { %>
+                    <% database_name = "/database/"+file ;%>
+                    <li><a href="<%= database_name %>"><%= file %></a></li>
+                <% }); %>
+            </ul>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#new_scan').click(function() {
+            container = document.getElementById('table_id');
+            newElement = $(document.createElement('pre'));
+            newElement.append(`<p>Scan en cours...</p>`);
+            newElement.append(`<div class="progress indigo lighten-4"><div class="indeterminate indigo darken-1"></div></div>`);
+            container.appendChild(newElement[0]);
+            $.ajax({
+                url: '/scan',
+                type: 'GET',
+                success: function (data) {
+                    console.log(data);
+                    container.removeChild(newElement[0]);
+                    window.location.replace('/database');
+                }
+            });
+        });
+        $('#save').click(function() {
+            var value = prompt("Saisissez le nom du fichier à enregistrer :");
+            if (value) {
+                container = document.getElementById('table_id');
+                newElement = $(document.createElement('pre'));
+                newElement.append(`<p>Enregistrement en cours...</p>`);
+                newElement.append(`<div class="progress indigo lighten-4"><div class="indeterminate indigo darken-1"></div></div>`);
+                container.appendChild(newElement[0]);
+                $.ajax({
+                    url: '/save',
+                    type: 'GET',
+                    data: {name: value},
+                    success: function (data) {
+                        console.log(data);
+                        container.removeChild(newElement[0]);
+                        window.location.replace('/database');
+                    }
+                });
+            }
+        });
+    })
+</script>
 <div class="row">
-    <table class="centered highlight responsive-table white-text">
-        <thead class="indigo darken-1">
+    <table class="centered highlight responsive-table">
+        <thead class="indigo darken-1 white-text">
             <tr>
                 <th colspan="1">Hostname</th>
                 <th colspan="1">IP</th>
@@ -24,45 +72,47 @@
             </tr>
         </thead>
         <tbody>
-            <% hosts.forEach((host,index) => { %>
+        <% hosts.forEach((host,hostIndex) => { %>
             <tr>
                 <td><%= host.name %></td>
                 <td><%= host.address %></td>
                 <td>
-                    <button class="btn arrow indigo darken-1" id="btn<%= index %>">Infos</button>
+                    <button class="btn indigo darken-1 row-btn" id="btn<%= hostIndex %>">Infos<i class="material-icons left">arrow_drop_down</i></button>
                 </td>
             </tr>
-            <%# ports.forEach((ports,index) => { %>
-                <tr id="dropdown<%= index %>" style="display:none; background-color: #8b9dee; text-align: center;">
-                    <td colspan="3">
-                        <table>
-                            <%# <tr>
-                                <td colspan="3">Informations</td>
-                            </tr> #%>
-                            <tr>
-                                <td colspan="3">Contenu de la première ligne de la liste déroulante</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            <% }); %>
-            <%# }); %> 
+            <tr id="dropdown<%= hostIndex %>" class="blue-grey lighten-3 center-align" style="display: none;">
+                <td colspan="3">
+                    <table>
+                        <%# ports.forEach((port,portsIndex) => { %>
+                        <%# <tr>
+                            <td colspan="3">Informations</td>
+                        </tr> #%>
+                        <tr>
+                            <td colspan="3">Contenu de la première ligne de la liste déroulante</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Contenu de la première ligne de la liste déroulante</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        <% }); %>
         </tbody>
     </table>
 </div>
 
 <script>
-    const btns = document.querySelectorAll('.arrow');
-    btns.forEach((btn, index) => {
+    const btns = document.querySelectorAll('.row-btn');
+    btns.forEach((btn, btnIndex) => {
         btn.addEventListener('click', function() {
             // récupère le contenu à afficher ou masquer
-            const dropdown = document.querySelector(`#dropdown${index}`);
+            const dropdownElement = document.querySelector(`#dropdown${btnIndex}`);
 
             // affiche ou cache le contenu en fonction de son état actuel
-            if (dropdown.style.display === 'none') {
-                dropdown.style.display = 'table-row';
+            if (dropdownElement.style.display === 'none') {
+                dropdownElement.style.display = 'table-row';
             } else {
-                dropdown.style.display = 'none';
+                dropdownElement.style.display = 'none';
             }
         });
     });

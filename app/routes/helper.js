@@ -31,28 +31,27 @@ function get_name(host) {
 
 function get_port(host) {
     console.log("in get_port")
-    if(host["ports"] != undefined) {
-        if (host["ports"]["extraports"] != undefined) {
+    if(host.hasOwnProperty('ports')) {
+        if (host["ports"].hasOwnProperty('extraports')) {
                 return host["ports"]["extraports"]["@count"] + host["ports"]["extraports"]["@state"]
         }
-        if (host["ports"]["port"] != undefined) {
+        else if (host["ports"].hasOwnProperty(port) &&  host['ports']['port'] !== null) {
             if (Array.isArray(host["ports"]["port"])) {
                 return "Ports found"
-            } else {
+            }
+            else {
                 var idPort = host["ports"]["port"]["@portid"] + "/" + host["ports"]["port"]["@protocol"]
                 var state = "state =" + host["ports"]["port"]["state"]["@state"]
                 var service = "service =" +  host["ports"]["port"]["service"]["@name"]
-                return idPort + state + service
-            } 
-        }
+                return idPort.concat(' state=',state, ' service=', service)
+            }
+        }                
     }
-}
-
-function testOnClickButton() {
-    console.log("test");
+    else {
+        return "No port found"
+    }
 }
 
 exports.get_ip = get_ip;
 exports.get_name = get_name;
 exports.get_port = get_port;
-exports.testOnClickButton = testOnClickButton;

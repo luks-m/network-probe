@@ -8,36 +8,55 @@ const { spawn } = require('child_process');
 // Router
 const router = express.Router();
 
-
-// Database
-const dbPath = './../JSON/database.json';
-const testPath = './../JSON/test.json';
-
 // Define routes
 router.get('/', (req, res) => {
-  res.render('index');
+  const files = fs.readdirSync('./../JSON/');
+
+  res.render('index', { files: files });
 })
 .get('/scan', async (req, res) => {
   console.log("Scan");
 
-  const python_path = './../Data/scan.py';
+  const python_path = './../script/scan.py';
   const python = spawn('python3', [python_path]);
 
   python.on('error', (err) => {
     console.log(err);
   });
 
-  python.stdout.on('data', function (data) {
-    console.log('Pipe data from python script ... data: ' + data);
-  });
-
-  python.on('close', (code) => {
-    console.log(`child process close all stdio with code ${code}`)
+  python.on('exit', (code) => {
     console.log("Scan done");
     res.redirect('/database');
   });
 })
-.get('/database', (req, res) => {
+.get('/save', (req, res) => {
+  console.log("Save");
+
+  const python_path = './../script/save.py';
+
+  const args = [req.query.name];
+  args.unshift(python_path);
+
+  const python = spawn('python3', args);
+
+  python.on('error', (err) => {
+    console.log(err);
+  });
+
+  python.on('exit', (code) => {
+    console.log("Save done");
+    res.redirect('/database');
+  });
+})
+.get('/database/:name?', (req, res) => {
+  const data_name = req.params.name || 'current_database.json';
+  
+  // Database
+  const dbPath = './../JSON/'+data_name;
+  const testPath = './../JSON/test.json';
+
+  const files = fs.readdirSync('./../JSON/');
+
   fs.readFile(dbPath, 'utf8', (err, data) => {
     if (err) {
       throw err;
@@ -53,7 +72,7 @@ router.get('/', (req, res) => {
 
       hosts.push(infosMachine);
     }
-    res.render('machinesAllMachines', { data: machines, hosts: hosts }); // ports: ports});
+    res.render('machinesAllMachines', { data: machines, hosts: hosts, files: files}); // ports: ports});
     // fs.readFile(testPath, 'utf8', (err, data) => {
     //   if (err) {
     //     throw err;
