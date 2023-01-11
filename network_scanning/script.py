@@ -39,23 +39,19 @@ def agressif_scan(path_xml2):
             print("FIN")
    
     
-
 def xmltojson(path_xml3):
-    print(path_xml3)
+    json_list = []
     for path in path_xml3:
-            print (path)
-            with open(path) as f:
-                data_dict = xmltodict.parse(f.read())
-            
-            f.close()
-            json_data = json.dumps(data_dict, indent=4, sort_keys=True)
+        with open(path) as f:
+            data_dict = xmltodict.parse(f.read())
+        json_list.append(data_dict)
+    json_data = json.dumps(json_list, indent=4, sort_keys=True)
+    with open(path_json, "w") as j:
+        j.write(json_data)
+    j.close
 
-            with open(path_json, "a") as j:
-                j.write(json_data)
 
-            j.close()
-
-#general_scan()
+general_scan()
 agressif_scan(path_xml2)
 xmltojson(path_xml3)
 
