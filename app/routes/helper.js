@@ -30,26 +30,23 @@ function get_name(host) {
 }
 
 function get_port(host) {
-    console.log("in get_port")
-    if(host.hasOwnProperty('ports')) {
-        if (host["ports"].hasOwnProperty('extraports')) {
-                return host["ports"]["extraports"]["@count"] + host["ports"]["extraports"]["@state"]
+    if (host.hasOwnProperty('extraports')) {
+        console.log("Extraport")
+        return host["extraports"]["@count"] + host["extraports"]["@state"]
+    }
+    if (host.hasOwnProperty('port') &&  host['ports']['port'] !== null) {
+        if (Array.isArray(host["port"])) {
+            console.log("Multiple Port")
+            return "Ports found"
         }
-        else if (host["ports"].hasOwnProperty(port) &&  host['ports']['port'] !== null) {
-            if (Array.isArray(host["ports"]["port"])) {
-                return "Ports found"
-            }
-            else {
-                var idPort = host["ports"]["port"]["@portid"] + "/" + host["ports"]["port"]["@protocol"]
-                var state = "state =" + host["ports"]["port"]["state"]["@state"]
-                var service = "service =" +  host["ports"]["port"]["service"]["@name"]
-                return idPort.concat(' state=',state, ' service=', service)
-            }
-        }                
-    }
-    else {
-        return "No port found"
-    }
+        else {
+            console.log("One Port")
+            var idPort = host["port"]["@portid"] + "/" + host["port"]["@protocol"]
+            var state = host["port"]["state"]["@state"]
+            var service =  host["port"]["service"]["@name"]
+            return idPort.concat(' state=',state, ' service=', service)
+        }
+    }  
 }
 
 exports.get_ip = get_ip;
