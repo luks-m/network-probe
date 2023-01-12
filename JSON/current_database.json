@@ -1,45 +1,18 @@
-{
-    "nmaprun": {
-        "@args": "nmap -sn -oX training.xml 172.21.202.0/24",
-        "@scanner": "nmap",
-        "@start": "1667468736",
-        "@startstr": "Thu Nov  3 10:45:36 2022",
-        "@version": "7.92",
-        "@xmloutputversion": "1.05",
-        "debugging": {
-            "@level": "0"
-        },
-        "host": [
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.50",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "90:8D:6E:5B:98:52",
-                        "@addrtype": "mac",
-                        "@vendor": "Dell"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "naberius.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "523",
-                    "@to": "100000"
-                }
+[
+    {
+        "nmaprun": {
+            "@args": "nmap -oX - -A -p 22-443 --script vulners --script-args mincvss=5.0 172.21.202.121",
+            "@scanner": "nmap",
+            "@start": "1673457079",
+            "@startstr": "Wed Jan 11 18:11:19 2023",
+            "@version": "7.93",
+            "@xmloutputversion": "1.05",
+            "debugging": {
+                "@level": "0"
             },
-            {
+            "host": {
+                "@endtime": "1673457084",
+                "@starttime": "1673457079",
                 "address": [
                     {
                         "@addr": "172.21.202.121",
@@ -51,60 +24,123 @@
                         "@vendor": "Dell"
                     }
                 ],
+                "distance": {
+                    "@value": "1"
+                },
                 "hostnames": {
                     "hostname": {
                         "@name": "rsr.rsr",
                         "@type": "PTR"
                     }
                 },
+                "ipidsequence": {
+                    "@class": "All zeros",
+                    "@values": "0,0,0,0,0,0"
+                },
+                "os": {
+                    "osmatch": {
+                        "@accuracy": "100",
+                        "@line": "67238",
+                        "@name": "Linux 4.15 - 5.6",
+                        "osclass": [
+                            {
+                                "@accuracy": "100",
+                                "@osfamily": "Linux",
+                                "@osgen": "4.X",
+                                "@type": "general purpose",
+                                "@vendor": "Linux",
+                                "cpe": "cpe:/o:linux:linux_kernel:4"
+                            },
+                            {
+                                "@accuracy": "100",
+                                "@osfamily": "Linux",
+                                "@osgen": "5.X",
+                                "@type": "general purpose",
+                                "@vendor": "Linux",
+                                "cpe": "cpe:/o:linux:linux_kernel:5"
+                            }
+                        ]
+                    },
+                    "portused": {
+                        "@portid": "22",
+                        "@proto": "tcp",
+                        "@state": "open"
+                    }
+                },
+                "ports": {
+                    "extraports": {
+                        "@count": "421",
+                        "@state": "filtered",
+                        "extrareasons": {
+                            "@count": "421",
+                            "@ports": "23-443",
+                            "@proto": "tcp",
+                            "@reason": "no-response"
+                        }
+                    },
+                    "port": {
+                        "@portid": "22",
+                        "@protocol": "tcp",
+                        "service": {
+                            "@conf": "10",
+                            "@extrainfo": "Ubuntu Linux; protocol 2.0",
+                            "@method": "probed",
+                            "@name": "ssh",
+                            "@ostype": "Linux",
+                            "@product": "OpenSSH",
+                            "@version": "8.9p1 Ubuntu 3",
+                            "cpe": [
+                                "cpe:/a:openbsd:openssh:8.9p1",
+                                "cpe:/o:linux:linux_kernel"
+                            ]
+                        },
+                        "state": {
+                            "@reason": "syn-ack",
+                            "@reason_ttl": "64",
+                            "@state": "open"
+                        }
+                    }
+                },
                 "status": {
                     "@reason": "arp-response",
                     "@reason_ttl": "0",
                     "@state": "up"
                 },
+                "tcpsequence": {
+                    "@difficulty": "Good luck!",
+                    "@index": "252",
+                    "@values": "697AE153,24ABAC39,9762366C,FD6F91A9,4DA41BAC,99489868"
+                },
+                "tcptssequence": {
+                    "@class": "1000HZ",
+                    "@values": "AECC0405,AECC0474,AECC04E1,AECC054E,AECC05BC,AECC062A"
+                },
                 "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "437",
+                    "@rttvar": "418",
+                    "@srtt": "1982",
                     "@to": "100000"
+                },
+                "trace": {
+                    "hop": {
+                        "@host": "rsr.rsr",
+                        "@ipaddr": "172.21.202.121",
+                        "@rtt": "1.98",
+                        "@ttl": "1"
+                    }
+                },
+                "uptime": {
+                    "@lastboot": "Thu Dec  8 19:34:37 2022",
+                    "@seconds": "2932607"
                 }
             },
-            {
+            "hosthint": {
                 "address": [
                     {
-                        "@addr": "172.21.202.124",
+                        "@addr": "172.21.202.121",
                         "@addrtype": "ipv4"
                     },
                     {
-                        "@addr": "30:D0:42:FB:7E:3D",
-                        "@addrtype": "mac",
-                        "@vendor": "Dell"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "maducos-precision-3650-tower.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "754",
-                    "@to": "100000"
-                }
-            },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.125",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "30:D0:42:FB:81:97",
+                        "@addr": "30:D0:42:FB:7F:F9",
                         "@addrtype": "mac",
                         "@vendor": "Dell"
                     }
@@ -114,101 +150,47 @@
                     "@reason": "arp-response",
                     "@reason_ttl": "0",
                     "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "455",
-                    "@to": "100000"
                 }
             },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.126",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "30:D0:42:FB:84:88",
-                        "@addrtype": "mac",
-                        "@vendor": "Dell"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "luks-m.rsr",
-                        "@type": "PTR"
-                    }
+            "runstats": {
+                "finished": {
+                    "@elapsed": "6.12",
+                    "@exit": "success",
+                    "@summary": "Nmap done at Wed Jan 11 18:11:24 2023; 1 IP address (1 host up) scanned in 6.12 seconds",
+                    "@time": "1673457084",
+                    "@timestr": "Wed Jan 11 18:11:24 2023"
                 },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "716",
-                    "@to": "100000"
+                "hosts": {
+                    "@down": "0",
+                    "@total": "1",
+                    "@up": "1"
                 }
             },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.127",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "90:8D:6E:5B:91:B3",
-                        "@addrtype": "mac",
-                        "@vendor": "Dell"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "thomas-precision-3650-tower.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "746",
-                    "@to": "100000"
-                }
+            "scaninfo": {
+                "@numservices": "422",
+                "@protocol": "tcp",
+                "@services": "22-443",
+                "@type": "syn"
             },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.128",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "30:D0:42:FE:3E:9B",
-                        "@addrtype": "mac",
-                        "@vendor": "Dell"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "mzizi-precision-3650-tower.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "435",
-                    "@to": "100000"
-                }
+            "verbose": {
+                "@level": "0"
+            }
+        }
+    },
+    {
+        "nmaprun": {
+            "@args": "nmap -oX - -A -p 22-443 --script vulners --script-args mincvss=5.0 172.21.202.133",
+            "@scanner": "nmap",
+            "@start": "1673457085",
+            "@startstr": "Wed Jan 11 18:11:25 2023",
+            "@version": "7.93",
+            "@xmloutputversion": "1.05",
+            "debugging": {
+                "@level": "0"
             },
-            {
+            "host": {
+                "@endtime": "1673457101",
+                "@starttime": "1673457085",
                 "address": [
                     {
                         "@addr": "172.21.202.133",
@@ -220,32 +202,182 @@
                         "@vendor": "Cisco Systems"
                     }
                 ],
+                "distance": {
+                    "@value": "1"
+                },
                 "hostnames": {
                     "hostname": {
                         "@name": "switch.rsr",
                         "@type": "PTR"
                     }
                 },
+                "ipidsequence": {
+                    "@class": "Randomized",
+                    "@values": "15D5,8577,3BD7,C63D,9199,C9AA"
+                },
+                "os": {
+                    "osmatch": {
+                        "@accuracy": "100",
+                        "@line": "18274",
+                        "@name": "Cisco IOS 15",
+                        "osclass": {
+                            "@accuracy": "100",
+                            "@osfamily": "IOS",
+                            "@osgen": "15.X",
+                            "@type": "router",
+                            "@vendor": "Cisco",
+                            "cpe": "cpe:/o:cisco:ios:15"
+                        }
+                    },
+                    "portused": [
+                        {
+                            "@portid": "22",
+                            "@proto": "tcp",
+                            "@state": "open"
+                        },
+                        {
+                            "@portid": "24",
+                            "@proto": "tcp",
+                            "@state": "closed"
+                        },
+                        {
+                            "@portid": "43657",
+                            "@proto": "udp",
+                            "@state": "closed"
+                        }
+                    ]
+                },
+                "ports": {
+                    "extraports": {
+                        "@count": "418",
+                        "@state": "closed",
+                        "extrareasons": {
+                            "@count": "418",
+                            "@ports": "24-79,81-442",
+                            "@proto": "tcp",
+                            "@reason": "reset"
+                        }
+                    },
+                    "port": [
+                        {
+                            "@portid": "22",
+                            "@protocol": "tcp",
+                            "service": {
+                                "@conf": "10",
+                                "@extrainfo": "protocol 1.99",
+                                "@method": "probed",
+                                "@name": "ssh",
+                                "@ostype": "IOS",
+                                "@product": "Cisco SSH",
+                                "@version": "1.25",
+                                "cpe": [
+                                    "cpe:/a:cisco:ssh:1.25",
+                                    "cpe:/o:cisco:ios"
+                                ]
+                            },
+                            "state": {
+                                "@reason": "syn-ack",
+                                "@reason_ttl": "254",
+                                "@state": "open"
+                            }
+                        },
+                        {
+                            "@portid": "23",
+                            "@protocol": "tcp",
+                            "service": {
+                                "@conf": "10",
+                                "@devicetype": "router",
+                                "@method": "probed",
+                                "@name": "telnet",
+                                "@ostype": "IOS",
+                                "@product": "Cisco router telnetd",
+                                "cpe": [
+                                    "cpe:/a:cisco:telnet",
+                                    "cpe:/o:cisco:ios"
+                                ]
+                            },
+                            "state": {
+                                "@reason": "syn-ack",
+                                "@reason_ttl": "254",
+                                "@state": "open"
+                            }
+                        },
+                        {
+                            "@portid": "80",
+                            "@protocol": "tcp",
+                            "service": {
+                                "@conf": "10",
+                                "@method": "probed",
+                                "@name": "http",
+                                "@product": "nginx",
+                                "cpe": "cpe:/a:igor_sysoev:nginx"
+                            },
+                            "state": {
+                                "@reason": "syn-ack",
+                                "@reason_ttl": "64",
+                                "@state": "open"
+                            }
+                        },
+                        {
+                            "@portid": "443",
+                            "@protocol": "tcp",
+                            "script": {
+                                "@id": "http-server-header",
+                                "@output": "nginx",
+                                "elem": "nginx"
+                            },
+                            "service": {
+                                "@conf": "10",
+                                "@method": "probed",
+                                "@name": "https",
+                                "@product": "nginx",
+                                "@tunnel": "ssl"
+                            },
+                            "state": {
+                                "@reason": "syn-ack",
+                                "@reason_ttl": "64",
+                                "@state": "open"
+                            }
+                        }
+                    ]
+                },
                 "status": {
                     "@reason": "arp-response",
                     "@reason_ttl": "0",
                     "@state": "up"
                 },
+                "tcpsequence": {
+                    "@difficulty": "Good luck!",
+                    "@index": "249",
+                    "@values": "2AB9ECCA,3DDD7AC8,6964D8BD,5B1114BF,6AFB1E6C,6BA075C6"
+                },
+                "tcptssequence": {
+                    "@class": "none returned (unsupported)"
+                },
                 "times": {
-                    "@rttvar": "11971",
-                    "@srtt": "11971",
+                    "@rttvar": "993",
+                    "@srtt": "2863",
                     "@to": "100000"
+                },
+                "trace": {
+                    "hop": {
+                        "@host": "switch.rsr",
+                        "@ipaddr": "172.21.202.133",
+                        "@rtt": "2.86",
+                        "@ttl": "1"
+                    }
                 }
             },
-            {
+            "hosthint": {
                 "address": [
                     {
-                        "@addr": "172.21.202.158",
+                        "@addr": "172.21.202.133",
                         "@addrtype": "ipv4"
                     },
                     {
-                        "@addr": "26:24:F5:1F:2D:34",
-                        "@addrtype": "mac"
+                        "@addr": "00:FC:BA:A2:39:47",
+                        "@addrtype": "mac",
+                        "@vendor": "Cisco Systems"
                     }
                 ],
                 "hostnames": null,
@@ -253,272 +385,31 @@
                     "@reason": "arp-response",
                     "@reason_ttl": "0",
                     "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "709",
-                    "@to": "100000"
                 }
             },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.175",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "30:D0:42:FB:81:98",
-                        "@addrtype": "mac",
-                        "@vendor": "Dell"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "kdieu-ub.rsr",
-                        "@type": "PTR"
-                    }
+            "runstats": {
+                "finished": {
+                    "@elapsed": "16.98",
+                    "@exit": "success",
+                    "@summary": "Nmap done at Wed Jan 11 18:11:42 2023; 1 IP address (1 host up) scanned in 16.98 seconds",
+                    "@time": "1673457102",
+                    "@timestr": "Wed Jan 11 18:11:42 2023"
                 },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "671",
-                    "@to": "100000"
+                "hosts": {
+                    "@down": "0",
+                    "@total": "1",
+                    "@up": "1"
                 }
             },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.180",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "30:D0:42:FB:85:AB",
-                        "@addrtype": "mac",
-                        "@vendor": "Dell"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "aloharicot.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "644",
-                    "@to": "100000"
-                }
+            "scaninfo": {
+                "@numservices": "422",
+                "@protocol": "tcp",
+                "@services": "22-443",
+                "@type": "syn"
             },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.197",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "26:24:F5:1F:2D:34",
-                        "@addrtype": "mac"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "loic-trupin-rsr.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "647",
-                    "@to": "100000"
-                }
-            },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.217",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "D0:94:66:1F:5D:9B",
-                        "@addrtype": "mac",
-                        "@vendor": "Dell"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "fabspace-idrac.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "464",
-                    "@to": "100000"
-                }
-            },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.219",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "54:05:DB:F5:44:8D",
-                        "@addrtype": "mac",
-                        "@vendor": "Lcfc(hefei) Electronics Technology"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "abigor.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "751",
-                    "@to": "100000"
-                }
-            },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.241",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "3C:7C:3F:60:1C:76",
-                        "@addrtype": "mac",
-                        "@vendor": "Asustek Computer"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "redone.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "376",
-                    "@to": "100000"
-                }
-            },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.243",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "26:24:F5:1F:2D:34",
-                        "@addrtype": "mac"
-                    }
-                ],
-                "hostnames": null,
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "5000",
-                    "@srtt": "711",
-                    "@to": "100000"
-                }
-            },
-            {
-                "address": [
-                    {
-                        "@addr": "172.21.202.244",
-                        "@addrtype": "ipv4"
-                    },
-                    {
-                        "@addr": "52:54:00:BD:5F:4D",
-                        "@addrtype": "mac",
-                        "@vendor": "QEMU virtual NIC"
-                    }
-                ],
-                "hostnames": {
-                    "hostname": {
-                        "@name": "desktop-lltq2fl.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "arp-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                },
-                "times": {
-                    "@rttvar": "2266",
-                    "@srtt": "635",
-                    "@to": "100000"
-                }
-            },
-            {
-                "address": {
-                    "@addr": "172.21.202.119",
-                    "@addrtype": "ipv4"
-                },
-                "hostnames": {
-                    "hostname": {
-                        "@name": "luigi-precision-3650-tower.rsr",
-                        "@type": "PTR"
-                    }
-                },
-                "status": {
-                    "@reason": "localhost-response",
-                    "@reason_ttl": "0",
-                    "@state": "up"
-                }
+            "verbose": {
+                "@level": "0"
             }
-        ],
-        "runstats": {
-            "finished": {
-                "@elapsed": "2.39",
-                "@exit": "success",
-                "@summary": "Nmap done at Thu Nov  3 10:45:38 2022; 256 IP addresses (18 hosts up) scanned in 2.39 seconds",
-                "@time": "1667468738",
-                "@timestr": "Thu Nov  3 10:45:38 2022"
-            },
-            "hosts": {
-                "@down": "238",
-                "@total": "256",
-                "@up": "18"
-            }
-        },
-        "verbose": {
-            "@level": "0"
         }
     }
-}
+]

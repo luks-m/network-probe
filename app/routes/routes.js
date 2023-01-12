@@ -49,10 +49,10 @@ router.get('/', (req, res) => {
   });
 })
 .get('/database/:name?', (req, res) => {
-  const data_name = req.params.name || 'current_database.json';
+  const data_name = req.params.name || 'results.json';
   
   // Database
-  const dbPath = './../JSON/'+data_name;
+  const dbPath = './../JSON/' + data_name;
   const testPath = './../JSON/test.json';
 
   const files = fs.readdirSync('./../JSON/');
@@ -61,18 +61,35 @@ router.get('/', (req, res) => {
     if (err) {
       throw err;
     }
-    var machines = JSON.parse(data);
+
+    var jsonFile = JSON.parse(data); 
     var hosts = [];
-    for (var i = 0; i < machines["nmaprun"]["host"].length; i++) {
-      var infosMachine = {};
-
-      const machine = machines["nmaprun"]["host"][i];
-      infosMachine["address"] = helper.get_ip(machine);
-      infosMachine["name"] = helper.get_name(machine);
-
-      hosts.push(infosMachine);
+    if(jsonFile.length == 0) {
+      return "Aucun appareil n'a été trouvé"
     }
-    res.render('machinesAllMachines', { data: machines, hosts: hosts, files: files}); // ports: ports});
+    else {
+      console.log(jsonFile.length)
+      for (var i = 0; i < jsonFile.length; i++) {
+        const machineFound = jsonFile[i];
+          if(!machineFound.hasOwnProperty('nmaprun')) {
+          return "Problème : nmap ne s'est pas lancé"
+        }
+        else {
+          const nmaprun = machineFound["nmaprun"];
+          var infosMachine = {};
+          if(!nmaprun.hasOwnProperty('host')) {
+            return "Aucun host n'a été trouvé"
+          }
+          else {
+            const host = nmaprun["host"];
+            infosMachine["address"] = helper.get_ip(host);
+            infosMachine["name"] = helper.get_name(host);
+            hosts.push(infosMachine);
+          }
+        }
+      }
+    }
+    res.render('machinesAllMachines', { data: jsonFile, hosts: hosts, files: files}); // ports: ports});
     // fs.readFile(testPath, 'utf8', (err, data) => {
     //   if (err) {
     //     throw err;
