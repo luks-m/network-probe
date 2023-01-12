@@ -21,7 +21,12 @@ app.use(express.static(config.app.staticDir));
 
 app.use(routes);
 
+//Automatically open
+const open = require('open');
+const url = "http://localhost:8888";
+
 // finally, launch our server
 const server = app.listen(config.server.port, config.server.host, () => {
   console.log(`server is listening on ${config.server.host}:${config.server.port}`);
+  open(url);
 });
