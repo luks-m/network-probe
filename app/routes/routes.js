@@ -49,7 +49,7 @@ router.get('/', (req, res) => {
   });
 })
 .get('/database/:name?', (req, res) => {
-  const data_name = req.params.name || 'results.json';
+  const data_name = req.params.name || 'current_database.json';
   
   // Database
   const dbPath = './../JSON/' + data_name;
@@ -76,15 +76,18 @@ router.get('/', (req, res) => {
         }
         else {
           const nmaprun = machineFound["nmaprun"];
-          var infosMachine = {};
+          var infosHost = {};
           if(!nmaprun.hasOwnProperty('host')) {
             return "Aucun host n'a été trouvé"
           }
           else {
             const host = nmaprun["host"];
-            infosMachine["address"] = helper.get_ip(host);
-            infosMachine["name"] = helper.get_name(host);
-            hosts.push(infosMachine);
+            //------------ HOST IP AND HOST NAME ------------//  
+            infosHost["address"] = helper.get_ip(host);
+            infosHost["name"] = helper.get_name(host);
+            hosts.push(infosHost);
+            //---------------- PORTS INFOS ------------------//  
+
           }
         }
       }
