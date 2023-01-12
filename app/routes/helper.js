@@ -49,18 +49,15 @@ function get_port(hostPorts) {
     var portsFound = []
     if (hostPorts.hasOwnProperty('port')) {
         if (Array.isArray(hostPorts["port"])) {
-            console.log("Multiple Port")
             for (let i = 0; i < hostPorts["port"].length; i++) {
                 portsFound.push(get_port_info(hostPorts["port"][i]));
             }
         }
         else {
-            console.log("One Port")
             portsFound.push(get_port_info(hostPorts["port"]));
         }        
     }
     else {
-        console.log("No port")
         portsFound.push(["Aucun port n'est accessible depuis le réseau"])
     }
     return portsFound
