@@ -29,26 +29,44 @@ function get_name(host) {
     }
 }
 
-function get_port(host) {
-    if (host.hasOwnProperty('extraports')) {
-        console.log("Extraport")
-        return host["extraports"]["@count"] + host["extraports"]["@state"]
+function get_extraports(hostPorts) {
+    if (hostPorts.hasOwnProperty('extraports')) {
+        return hostPorts["extraports"]["@count"] + " " + hostPorts["extraports"]["@state"]
     }
-    if (host.hasOwnProperty('port') &&  host['ports']['port'] !== null) {
-        if (Array.isArray(host["port"])) {
+    else {
+        return "Pas d'informations sur le nombre de ports scannés"
+    }
+}
+
+function get_port_info(port) {
+    var idPort = port["@portid"] + "/" + port["@protocol"]
+    var state = port["state"]["@state"]
+    var service =  port["service"]["@name"]
+    return idPort.concat('\t state=',state, ' service=', service)
+}
+
+function get_port(hostPorts) {
+    var portsFound = []
+    if (hostPorts.hasOwnProperty('port')) {
+        if (Array.isArray(hostPorts["port"])) {
             console.log("Multiple Port")
-            return "Ports found"
+            for (let i = 0; i < hostPorts["port"].length; i++) {
+                portsFound.push(get_port_info(hostPorts["port"][i]));
+            }
         }
         else {
             console.log("One Port")
-            var idPort = host["port"]["@portid"] + "/" + host["port"]["@protocol"]
-            var state = host["port"]["state"]["@state"]
-            var service =  host["port"]["service"]["@name"]
-            return idPort.concat(' state=',state, ' service=', service)
-        }
-    }  
+            portsFound.push(get_port_info(hostPorts["port"]));
+        }        
+    }
+    else {
+        console.log("No port")
+        portsFound.push(["Aucun port n'est accessible depuis le réseau"])
+    }
+    return portsFound
 }
 
 exports.get_ip = get_ip;
 exports.get_name = get_name;
 exports.get_port = get_port;
+exports.get_extraports = get_extraports;

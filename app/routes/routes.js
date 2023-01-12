@@ -64,11 +64,11 @@ router.get('/', (req, res) => {
 
     var jsonFile = JSON.parse(data); 
     var hosts = [];
+    var ports = [];
     if(jsonFile.length == 0) {
       return "Aucun appareil n'a été trouvé"
     }
     else {
-      console.log(jsonFile.length)
       for (var i = 0; i < jsonFile.length; i++) {
         const machineFound = jsonFile[i];
           if(!machineFound.hasOwnProperty('nmaprun')) {
@@ -77,19 +77,28 @@ router.get('/', (req, res) => {
         else {
           const nmaprun = machineFound["nmaprun"];
           var infosHost = {};
+          // var infosPort = {};
           if(!nmaprun.hasOwnProperty('host')) {
             return "Aucun host n'a été trouvé"
           }
           else {
-            const host = nmaprun["host"];
             //------------ HOST IP AND HOST NAME ------------//  
+            const host = nmaprun["host"];
             infosHost["address"] = helper.get_ip(host);
             infosHost["name"] = helper.get_name(host);
-            hosts.push(infosHost);
-            //---------------- PORTS INFOS ------------------//  
 
+            //---------------- PORTS INFOS ------------------//  
+            if(!host.hasOwnProperty('ports')) {
+              return "Aucun port n'a été scanné"
+            }
+            else {
+              const hostPorts = host["ports"];
+              infosHost["extraports"] = helper.get_extraports(hostPorts);
+              infosHost["ports"] = helper.get_port(hostPorts);
+            }
           }
         }
+        hosts.push(infosHost);
       }
     }
     res.render('machinesAllMachines', { data: jsonFile, hosts: hosts, files: files}); // ports: ports});
