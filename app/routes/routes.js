@@ -53,7 +53,6 @@ router.get('/', (req, res) => {
   
   // Database
   const dbPath = './../JSON/' + data_name;
-  const testPath = './../JSON/test.json';
 
   const files = fs.readdirSync('./../JSON/');
 
@@ -77,7 +76,6 @@ router.get('/', (req, res) => {
         else {
           const nmaprun = machineFound["nmaprun"];
           var infosHost = {};
-          // var infosPort = {};
           if(!nmaprun.hasOwnProperty('host')) {
             return "Aucun host n'a été trouvé"
           }
@@ -93,7 +91,6 @@ router.get('/', (req, res) => {
             }
             else {
               const hostPorts = host["ports"];
-              infosHost["extraports"] = helper.get_extraports(hostPorts);
               infosHost["ports"] = helper.get_port(hostPorts);
             }
           }
@@ -101,22 +98,7 @@ router.get('/', (req, res) => {
         hosts.push(infosHost);
       }
     }
-    res.render('machinesAllMachines', { data: jsonFile, hosts: hosts, files: files}); // ports: ports});
-    // fs.readFile(testPath, 'utf8', (err, data) => {
-    //   if (err) {
-    //     throw err;
-    //   }
-    //   var testMachines = JSON.parse(data);
-    //   var ports = []
-    //   for (var i = 0; i < testMachines["nmaprun"]["host"].length; i++) {
-    //     var infosPort = {};
-
-    //     const testMachine = testMachines["nmaprun"]["host"][i];
-    //     infosPort["port"] = helper.get_port(machine);
-
-    //     ports.push(infosPort)
-    //   }
-    // });
+    res.render('machinesAllMachines', { data: jsonFile, hosts: hosts, files: files});
   });
 })
 .use((req, res) => {
