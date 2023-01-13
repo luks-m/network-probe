@@ -1,3 +1,2 @@
-app/node_modules/*
+app/node_modules/
 test*
-JSON/old_database.json
