@@ -85,14 +85,11 @@
                     <button class="btn indigo darken-1 row-btn" id="btn<%= hostIndex %>">Infos<i class="material-icons left">arrow_drop_down</i></button>
                 </td>
             </tr>
-            <tr id="dropdown<%= hostIndex %>" class="center-align " style="display: none;">
+            <tr id="dropdown<%= hostIndex %>" class="center-align"  style="display: none;">
                 <td colspan="3" class="collapsible popout">
-                    <li>
-                        <div class="collapsible-header blue-grey lighten-3 no-border"> <%= host.extraports %> </div>
-                    </li>
                     <% host.ports.forEach((port) => { %>
                     <li>
-                        <div class="collapsible-header blue-grey lighten-3 no-border"> <%=  port %> </div>
+                        <div class="collapsible-header blue-grey lighten-3 no-border">Port : <%=port.id%> / Protocole : <%=port.protocol%> / Service : <%=port.service%></div>
                         <div class="collapsible-body blue-grey lighten-3"> hello </div>
                     </li>
                     <% }); %>

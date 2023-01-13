@@ -31,4 +31,10 @@ main {
     flex: 1 0 auto;
 }
 
+
 .material-icons.md-48 { font-size: 48px; }
+
+.collapsible {
+    background-color: #e6e6e6;
+    list-style-type: none;
+}

@@ -29,20 +29,8 @@ function get_name(host) {
     }
 }
 
-function get_extraports(hostPorts) {
-    if (hostPorts.hasOwnProperty('extraports')) {
-        return hostPorts["extraports"]["@count"] + " " + hostPorts["extraports"]["@state"]
-    }
-    else {
-        return "Pas d'informations sur le nombre de ports scannés"
-    }
-}
-
 function get_port_info(port) {
-    var idPort = port["@portid"] + "/" + port["@protocol"]
-    var state = port["state"]["@state"]
-    var service =  port["service"]["@name"]
-    return idPort.concat('\t state=',state, ' service=', service)
+    return {'id':port["@portid"], 'protocol': port["@protocol"], 'service': port["service"]["@name"]};
 }
 
 function get_port(hostPorts) {
@@ -66,4 +54,3 @@ function get_port(hostPorts) {
 exports.get_ip = get_ip;
 exports.get_name = get_name;
 exports.get_port = get_port;
-exports.get_extraports = get_extraports;
