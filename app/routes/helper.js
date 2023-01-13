@@ -30,7 +30,7 @@ function get_name(host) {
 }
 
 function get_port_info(port) {
-    return {'id':port["@portid"], 'protocol': port["@protocol"], 'service': port["service"]["@name"]};
+    return [`Port : ${port["@portid"]} / Protocole :  ${port["@protocol"]} / Service : ${port["service"]["@name"]}`];
 }
 
 function get_port(hostPorts) {

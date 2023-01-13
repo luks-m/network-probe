@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
   console.log("Scan");
 
   const python_path = './../script/scan.py';
-  const python = spawn('python3', [python_path]);
+  const python = spawn('python', [python_path]);
 
   python.on('error', (err) => {
     console.log(err);
@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
   const args = [req.query.name];
   args.unshift(python_path);
 
-  const python = spawn('python3', args);
+  const python = spawn('python', args);
 
   python.on('error', (err) => {
     console.log(err);
@@ -63,7 +63,6 @@ router.get('/', (req, res) => {
 
     var jsonFile = JSON.parse(data); 
     var hosts = [];
-    var ports = [];
     if(jsonFile.length == 0) {
       return "Aucun appareil n'a été trouvé"
     }

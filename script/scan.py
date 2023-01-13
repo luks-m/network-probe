@@ -5,6 +5,8 @@ import untangle
 import os
 import shutil
 
+if os.path.exists('../build'):
+    shutil.rmtree("../build")
 os.mkdir("../build")
 
 path_xml_general = "../build/results_general.xml"
