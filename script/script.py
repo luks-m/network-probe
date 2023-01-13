@@ -2,46 +2,51 @@ import json
 import nmap
 import xmltodict
 import untangle
+import os
+import shutil
 
-path_xml = "../Data/results_g.xml"
-path_xml2 = "../Data/results_p"
-path_json = "../Data/results.json"
-path_xml3 =[]
+os.mkdir("../build")
+
+path_xml_general = "../build/results_general.xml"
+path_json = "../JSON/current_database.json"
+array_path_xml =[]
 
 scanner = nmap.PortScanner()
 def general_scan(): 
   
     scanner.scan(hosts='172.21.202.0/24', arguments='-sV -Pn -n')
-    fileXML = open(path_xml, "wb")
+    fileXML = open(path_xml_general, "wb")
 	#Create XML nmap report
     fileXML.write(scanner.get_nmap_last_output())
     fileXML.close()
    
 
-def agressif_scan(path_xml2):
+def agressif_scan():
     print("DÉBUT")
-    nmap1 = untangle.parse(path_xml)
+    path_xml_host = "../build/results_host"
+    
+    nmap1 = untangle.parse(path_xml_general)
     host_iterator = nmap1.nmaprun.host
     i = 0
     for host in host_iterator:
         if(host.address[0] is not None) :
-            path_xml2 += str(i) + ".xml"
-            fileXML2 = open(path_xml2, "wb")    
+            path_xml_host += str(i) + ".xml"
+            fileXML2 = open(path_xml_host, "wb")    
             print(host.address[0]["addr"])
             scanner.scan(hosts=host.address[0]["addr"], arguments = '-A -p 22-443 --script vulners --script-args mincvss=5.0')
             fileXML2.write(scanner.get_nmap_last_output())
             fileXML2.close()
-            path_xml3.append(path_xml2)
-            print(path_xml3)
-            path_xml2 = "../Data/results_p"
+            array_path_xml.append(path_xml_host)
+            #print(array_path_xml)
+            path_xml_host = "../build/results_host"
             i+=1
         else :
             print("FIN")
    
     
-def xmltojson(path_xml3):
+def xmltojson():
     json_list = []
-    for path in path_xml3:
+    for path in array_path_xml:
         with open(path) as f:
             data_dict = xmltodict.parse(f.read())
         json_list.append(data_dict)
@@ -52,8 +57,9 @@ def xmltojson(path_xml3):
 
 
 general_scan()
-agressif_scan(path_xml2)
-xmltojson(path_xml3)
+agressif_scan()
+xmltojson()
 
-
-
+#Ne marche que si build est vide
+#os.rmdir("../build")
+shutil.rmtree("../build")
