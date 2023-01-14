@@ -121,7 +121,7 @@ function get_vuln_from_table(vuln_table) {
             var cve_dict = {}
             if(cve.hasOwnProperty('elem')) {
                 if(Array.isArray(cve["elem"])) {
-                    for (let j = 0; j < element.length; j++) {
+                    for (let j = 0; j < cve["elem"].length; j++) {
                         const element = cve["elem"][j];
                         cve_dict[element["@key"]] = element["#text"]
                     }
@@ -159,4 +159,3 @@ function get_vuln_from_table(vuln_table) {
 exports.get_ip = get_ip;
 exports.get_name = get_name;
 exports.get_port = get_port;
-exports.get_vulnerabilities = get_vulnerabilities;

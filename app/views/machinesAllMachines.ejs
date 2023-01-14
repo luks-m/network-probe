@@ -104,13 +104,16 @@
                         <% if (port['vuln'] != null) { %>
                             <div class="collapsible-header red lighten-3 no-border"><%= port['data'] %></div>
                             <% port.vuln.forEach((vuln) => { %>
-                                <div class="collapsible-body blue-grey lighten-4">Type : <%=vuln['type']%> / Niveau cvss : <%=vuln['cvss']%> / Nom : <%=vuln['id']%></div>
+                                <div class="collapsible-body blue-grey lighten-4">
+                                    Type : <%=vuln['type']%> / Niveau cvss : <%=vuln['cvss']%> / Nom : <%=vuln['id']%>
+                                    <% const link = "https://vulners.com/"+vuln['type']+"/"+vuln['id'] %>
+                                    <a href="<%=link%>" class="btn waves-effect waves-light blue-grey lighten-3" target="_blank">Description</a>
+                                </div>
+                            <% }); %>
                         <% } else {%>
                             <div class="collapsible-header green lighten-3 no-border"><%= port['data'] %></div>
                             <div class="collapsible-body  blue-grey lighten-4"> Aucune vulnérabilité détectée </div>
                         <% } %>
-                            
-                        
                     </li>
                     <% }); %>
                 </td>        
