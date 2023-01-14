@@ -17,8 +17,11 @@ router.get('/', (req, res) => {
 .get('/scan', async (req, res) => {
   console.log("Scan");
 
+  const args = [req.query.name];
   const python_path = './../script/scan.py';
-  const python = spawn('python', [python_path]);
+  args.unshift(python_path);
+
+  const python = spawn('python', args);
 
   python.on('error', (err) => {
     console.log(err);

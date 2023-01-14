@@ -9,20 +9,24 @@
     <script>
         $(document).ready(function() {
             $('#scan_btn').click(function() {
-                container = document.getElementById('row-id');
-                newElement = $(document.createElement('pre'));
-                newElement.append(`<p>Scan en cours...</p>`);
-                newElement.append(`<div class="progress indigo lighten-4"><div class="indeterminate indigo darken-1"></div></div>`);
-                container.appendChild(newElement[0]);
-                $.ajax({
-                    url: '/scan',
-                    type: 'GET',
-                    success: function (data) {
-                        console.log(data);
-                        container.removeChild(newElement[0]);
-                        window.location.replace('/database');
-                    }
-                });
+                var value = prompt("Saisissez la plage d'addresses à tester (adresse/masque) :");
+                if (value) {
+                    container = document.getElementById('row-id');
+                    newElement = $(document.createElement('pre'));
+                    newElement.append(`<p>Scan en cours...</p>`);
+                    newElement.append(`<div class="progress indigo lighten-4"><div class="indeterminate indigo darken-1"></div></div>`);
+                    container.appendChild(newElement[0]);
+                    $.ajax({
+                        url: '/scan',
+                        type: 'GET',
+                        data: {name: value},
+                        success: function (data) {
+                            console.log(data);
+                            container.removeChild(newElement[0]);
+                            window.location.replace('/database');
+                        }
+                    });
+                }
             });
         })
     </script>

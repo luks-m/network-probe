@@ -4,6 +4,7 @@ import xmltodict
 import untangle
 import os
 import shutil
+import sys
 
 if os.path.exists('../build'):
     shutil.rmtree("../build")
@@ -13,9 +14,11 @@ path_xml_general = "../build/results_general.xml"
 path_json = "../JSON/current_database.json"
 array_path_xml =[]
 
+addresses = sys.argv[1]
+
 scanner = nmap.PortScanner()
 def general_scan():
-    scanner.scan(hosts='172.21.202.0/24', arguments='-sV -Pn -n')
+    scanner.scan(hosts=addresses, arguments='-sV -Pn -n')
     fileXML = open(path_xml_general, "wb")
 	#Create XML nmap report
     fileXML.write(scanner.get_nmap_last_output())

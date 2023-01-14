@@ -30,20 +30,24 @@
     });
     $(document).ready(function() {
         $('#new_scan').click(function() {
-            container = document.getElementById('table_id');
-            newElement = $(document.createElement('pre'));
-            newElement.append(`<p>Scan en cours...</p>`);
-            newElement.append(`<div class="progress indigo lighten-4"><div class="indeterminate indigo darken-1"></div></div>`);
-            container.appendChild(newElement[0]);
-            $.ajax({
-                url: '/scan',
-                type: 'GET',
-                success: function (data) {
-                    console.log(data);
-                    container.removeChild(newElement[0]);
-                    window.location.replace('/database');
-                }
-            });
+            var value = prompt("Saisissez la plage d'addresses à tester (adresse/masque) :");
+            if (value) {
+                container = document.getElementById('table_id');
+                newElement = $(document.createElement('pre'));
+                newElement.append(`<p>Scan en cours...</p>`);
+                newElement.append(`<div class="progress indigo lighten-4"><div class="indeterminate indigo darken-1"></div></div>`);
+                container.appendChild(newElement[0]);
+                $.ajax({
+                    url: '/scan',
+                    type: 'GET',
+                    data: {name: value},
+                    success: function (data) {
+                        console.log(data);
+                        container.removeChild(newElement[0]);
+                        window.location.replace('/database');
+                    }
+                });
+            }
         });
         $('#save').click(function() {
             var value = prompt("Saisissez le nom du fichier à enregistrer :");
@@ -102,12 +106,16 @@
                     <% host.ports.forEach((port) => { %>
                     <li>
                         <% if (port['vuln'] != null) { %>
-                            <div class="collapsible-header red lighten-3 no-border"><%= port['data'] %></div>
+                            <div class="collapsible-header red lighten-2 no-border"><%= port['data'] %></div>
                             <% port.vuln.forEach((vuln) => { %>
                                 <div class="collapsible-body blue-grey lighten-4">
-                                    Type : <%=vuln['type']%> / Niveau cvss : <%=vuln['cvss']%> / Nom : <%=vuln['id']%>
-                                    <% const link = "https://vulners.com/"+vuln['type']+"/"+vuln['id'] %>
-                                    <a href="<%=link%>" class="btn waves-effect waves-light blue-grey lighten-3" target="_blank">Description</a>
+                                    <div class="row">
+                                        <div class="col s2">Type : <%=vuln['type']%></div>
+                                        <div class="col s2">Niveau cvss : <%=vuln['cvss']%></div>
+                                        <div class="col s6">Nom : <%=vuln['id']%></div>
+                                        <% const link = "https://vulners.com/"+vuln['type']+"/"+vuln['id'] %>
+                                        <a href="<%=link%>" class="col s2 btn waves-effect waves-light red lighten-2" target="_blank">Description</a>
+                                    </div>
                                 </div>
                             <% }); %>
                         <% } else {%>
