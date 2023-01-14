@@ -30,7 +30,7 @@ function get_name(host) {
 }
 
 function get_port_info(port) {
-    return {'data': [`Port : ${port["@portid"]} / Protocole :  ${port["@protocol"]} / Service : ${port["service"]["@name"]}`], 'vuln': null};
+    return {'data': [`Port : ${port["@portid"]} / Protocole :  ${port["@protocol"]} / Service : ${port["service"]["@name"]}`], 'vuln': get_vulnerabilities(port)};
 }
 
 function get_port(hostPorts) {

@@ -103,7 +103,8 @@
                     <li>
                         <% if (port['vuln'] != null) { %>
                             <div class="collapsible-header red lighten-3 no-border"><%= port['data'] %></div>
-                            <div class="collapsible-body blue-grey lighten-4"> <%= port['vuln'] %> </div>
+                            <% port.vuln.forEach((vuln) => { %>
+                                <div class="collapsible-body blue-grey lighten-4">Type : <%=vuln['type']%> / Niveau cvss : <%=vuln['cvss']%> / Nom : <%=vuln['id']%></div>
                         <% } else {%>
                             <div class="collapsible-header green lighten-3 no-border"><%= port['data'] %></div>
                             <div class="collapsible-body  blue-grey lighten-4"> Aucune vulnérabilité détectée </div>
