@@ -18,7 +18,7 @@ addresses = sys.argv[1]
 
 scanner = nmap.PortScanner()
 def general_scan():
-    scanner.scan(hosts=addresses, arguments='-sV -Pn -n')
+    scanner.scan(hosts=addresses, arguments='-Pn -n')
     fileXML = open(path_xml_general, "wb")
 	#Create XML nmap report
     fileXML.write(scanner.get_nmap_last_output())
@@ -37,7 +37,7 @@ def agressif_scan():
             path_xml_host += str(i) + ".xml"
             fileXML2 = open(path_xml_host, "wb")    
             print(host.address[0]["addr"])
-            scanner.scan(hosts=host.address[0]["addr"], arguments = '-A -p 22-443 --script vulners --script-args mincvss=5.0')
+            scanner.scan(hosts=host.address[0]["addr"], arguments = '-A --top-ports 1000 --script vulners --script-args mincvss=5.0')
             fileXML2.write(scanner.get_nmap_last_output())
             fileXML2.close()
             array_path_xml.append(path_xml_host)
