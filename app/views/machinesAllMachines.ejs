@@ -89,8 +89,8 @@
                 <td colspan="3" class="collapsible popout">
                     <% host.ports.forEach((port) => { %>
                     <li>
-                        <div class="collapsible-header blue-grey lighten-3 no-border"><%= port %></div>
-                        <div class="collapsible-body blue-grey lighten-3"> hello </div>
+                        <div class="collapsible-header blue-grey lighten-3 no-border"><%= port['data'] %></div>
+                        <div class="collapsible-body blue-grey lighten-3"> <%= port['vuln'] %> </div>
                     </li>
                     <% }); %>
                 </td>        

@@ -30,7 +30,7 @@ function get_name(host) {
 }
 
 function get_port_info(port) {
-    return [`Port : ${port["@portid"]} / Protocole :  ${port["@protocol"]} / Service : ${port["service"]["@name"]}`];
+    return {'data': [`Port : ${port["@portid"]} / Protocole :  ${port["@protocol"]} / Service : ${port["service"]["@name"]}`], 'vuln': null};
 }
 
 function get_port(hostPorts) {
@@ -46,11 +46,35 @@ function get_port(hostPorts) {
         }        
     }
     else {
-        portsFound.push(["Aucun port n'est accessible depuis le réseau"])
+        portsFound.push({'data': ["Aucun port n'est accessible depuis le réseau"], vuln: null})
     }
     return portsFound
+}
+
+function get_vuln_table(port) {
+    if (port.hasOwnProperty('script')) {
+        const script = port["script"];
+        if (script.hasOwnProperty('@id') && script['@id'] == 'vulners') {
+            if (Array.isArray(script)) {
+                for (let i = 0; i < port["script"].length; i++) {
+                    if (script[i].hasOwnProperty('table')) {
+                        table =script[i]["table"];
+                        if (Array.isArray(table)) {
+                            for (let j = 0; j < table.length; j++) {
+                                if (table[j].hasOwnProperty('table')) {
+                                    return table[j]["table"];
+                                }
+                        }
+                        
+                    }
+                }
+            }
+        }    
+    }
+}
 }
 
 exports.get_ip = get_ip;
 exports.get_name = get_name;
 exports.get_port = get_port;
+exports.get_vuln_table = get_vuln_table;
