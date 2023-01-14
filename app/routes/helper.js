@@ -113,6 +113,49 @@ function get_vulnerabilities(port) {
     }
 }
 
+function get_vuln_from_table(vuln_table) {
+    var vuln_discovered = []
+    if (Array.isArray(vuln_table)) {
+        for (let i = 0; i < vuln_table.length; i++) {
+            const cve = vuln_table[i];
+            var cve_dict = {}
+            if(cve.hasOwnProperty('elem')) {
+                if(Array.isArray(cve["elem"])) {
+                    for (let j = 0; j < element.length; j++) {
+                        const element = cve["elem"][j];
+                        cve_dict[element["@key"]] = element["#text"]
+                    }
+                }
+                else {
+                    cve_dict[cve["elem"]["@key"]] = cve["elem"]["#text"] 
+                }
+            }
+            else {
+                cve_dict["error"] = "Aucune information trouvé"
+            }
+        vuln_discovered.push(cve_dict)            
+        }
+    } 
+    else {
+        if(vuln_table.hasOwnProperty('elem')) {
+            if(Array.isArray(cve["elem"])) {
+                for (let j = 0; j < element.length; j++) {
+                    const element = cve["elem"][j];
+                    cve_dict[element["@key"]] = element["#text"]
+                }
+            }
+            else {
+                cve_dict[cve["elem"]["@key"]] = cve["elem"]["#text"] 
+            }
+        }
+        else {
+            cve_dict["error"] = "Aucune information trouvé"
+        }
+        vuln_discovered.push(cve_dict)            
+    }
+    return vuln_discovered 
+}
+
 exports.get_ip = get_ip;
 exports.get_name = get_name;
 exports.get_port = get_port;
