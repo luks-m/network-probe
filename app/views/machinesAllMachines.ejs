@@ -73,6 +73,7 @@
             <tr>
                 <th colspan="1">Hostname</th>
                 <th colspan="1">IP</th>
+                <th colspan="1">Etat</th>
                 <th colspan="1">Plus d'informations</th>
             </tr>
         </thead>
@@ -81,16 +82,34 @@
             <tr>
                 <td><%= host.name %></td>
                 <td><%= host.address %></td>
+                <% vuln_bool = false; %>
+                <% host.ports.forEach((port) => { %>
+                    <% if (port['vuln'] != null) { %>
+                        <% vuln_bool = true; %>
+                    <% } %>
+                <% }); %>
+                <% if (vuln_bool) { %>
+                    <td><i class="material-icons" style="color: red;">warning</i></td>
+                <% } else {%>
+                    <td><i class="material-icons" style="color: green;">check</i></td>
+                <% } %>
                 <td>
                     <button class="btn indigo darken-1 row-btn" id="btn<%= hostIndex %>">Infos<i class="material-icons left">arrow_drop_down</i></button>
                 </td>
             </tr>
             <tr id="dropdown<%= hostIndex %>" class="center-align"  style="display: none;">
-                <td colspan="3" class="collapsible popout">
+                <td colspan="4" class="collapsible popout">
                     <% host.ports.forEach((port) => { %>
                     <li>
-                        <div class="collapsible-header blue-grey lighten-3 no-border"><%= port['data'] %></div>
-                        <div class="collapsible-body blue-grey lighten-3"> <%= port['vuln'] %> </div>
+                        <% if (port['vuln'] != null) { %>
+                            <div class="collapsible-header red lighten-3 no-border"><%= port['data'] %></div>
+                            <div class="collapsible-body blue-grey lighten-4"> <%= port['vuln'] %> </div>
+                        <% } else {%>
+                            <div class="collapsible-header green lighten-3 no-border"><%= port['data'] %></div>
+                            <div class="collapsible-body  blue-grey lighten-4"> Aucune vulnérabilité détectée </div>
+                        <% } %>
+                            
+                        
                     </li>
                     <% }); %>
                 </td>        

@@ -51,7 +51,7 @@ function get_port(hostPorts) {
     return portsFound
 }
 
-function get_vuln_table(port) {
+function get_vulnerabilities(port) {
     if (port.hasOwnProperty('script')) {
         const script = port["script"];
         if (script.hasOwnProperty('@id') && script['@id'] == 'vulners') {
@@ -62,19 +62,58 @@ function get_vuln_table(port) {
                         if (Array.isArray(table)) {
                             for (let j = 0; j < table.length; j++) {
                                 if (table[j].hasOwnProperty('table')) {
-                                    return table[j]["table"];
+                                    return get_vuln_from_table(table[j]["table"]);
                                 }
+                                else {
+                                    return null;
+                                }
+                            }
                         }
-                        
+                        else {
+                            if (table.hasOwnProperty('table')) {
+                                return get_vuln_from_table(table["table"]);
+                            }
+                        }
+                    }
+                    else {
+                        return null;
                     }
                 }
             }
-        }    
+            else {
+                if (script.hasOwnProperty('table')) {
+                    table =script["table"];
+                    if (Array.isArray(table)) {
+                        for (let j = 0; j < table.length; j++) {
+                            if (table[j].hasOwnProperty('table')) {
+                                return get_vuln_from_table(table[j]["table"]);
+                            }
+                            else {
+                                return null;
+                            }
+                        }
+                    }
+                    else {
+                        if (table.hasOwnProperty('table')) {
+                            return get_vuln_from_table(table["table"]);
+                        }
+                    }
+                }
+                else {
+                    return null;
+                }
+            }
+        }
+        else {
+            return null;
+        }
     }
-}
+    else {
+        return null;
+    }
 }
 
 exports.get_ip = get_ip;
 exports.get_name = get_name;
 exports.get_port = get_port;
-exports.get_vuln_table = get_vuln_table;
+exports.get_vulnerabilities = get_vulnerabilities;

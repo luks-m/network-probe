@@ -38,3 +38,7 @@ main {
     background-color: #e6e6e6;
     list-style-type: none;
 }
+
+.btn-small {
+    width: 5px;
+  }

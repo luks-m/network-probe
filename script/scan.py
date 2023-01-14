@@ -14,8 +14,7 @@ path_json = "../JSON/current_database.json"
 array_path_xml =[]
 
 scanner = nmap.PortScanner()
-def general_scan(): 
-  
+def general_scan():
     scanner.scan(hosts='172.21.202.0/24', arguments='-sV -Pn -n')
     fileXML = open(path_xml_general, "wb")
 	#Create XML nmap report
