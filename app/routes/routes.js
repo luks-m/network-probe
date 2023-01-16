@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
   res.render('index', { files: files });
 })
 .get('/scan', async (req, res) => {
-  console.log("Scan");
+  console.log("Scan en cours...");
 
   const args = [req.query.name];
   const python_path = './../script/scan.py';
@@ -28,12 +28,12 @@ router.get('/', (req, res) => {
   });
 
   python.on('exit', (code) => {
-    console.log("Scan done");
+    console.log("Scan effectué");
     res.redirect('/database');
   });
 })
 .get('/save', (req, res) => {
-  console.log("Save");
+  console.log("Sauvegarde en cours...");
 
   const python_path = './../script/save.py';
 
@@ -47,7 +47,7 @@ router.get('/', (req, res) => {
   });
 
   python.on('exit', (code) => {
-    console.log("Save done");
+    console.log("Sauvergarde effectuée");
     res.redirect('/database');
   });
 })

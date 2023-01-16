@@ -7,11 +7,11 @@ function get_ip(host) {
             return host["address"]["@addr"];
         }
         else {
-            return "No IP found";
+            return "Pas d'IP trouvée";
         }
     }
     else {
-        return "No IP found";
+        return "Pas d'IP trouvée";
     }
 }
 
@@ -21,11 +21,11 @@ function get_name(host) {
             return host["hostnames"]["hostname"]["@name"];
         }
         else {
-            return "No name found";
+            return "Pas de nom trouvé";
         }
     }
     else {
-        return "No name found";
+        return "Pas de nom trouvé";
     }
 }
 
