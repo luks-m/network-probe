@@ -90,3 +90,6 @@ On the results page, you can see the results of the scan. The results are displa
 - [MARAIS Lucas](https://github.com/luks-m)
 - [BERARD Thomas](https://github.com/tberard002)
 - [CANNAROZZO Luigi](https://github.com/LuigiCan)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)   
+MIT License - Copyright (c) 2022 MARAIS Lucas, BERARD Thomas, ZIZI Marwan, CANNAROZZO Luigi
